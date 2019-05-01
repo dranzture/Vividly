@@ -13,12 +13,21 @@
 }
 else
 {
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Membership Type</th>
+            </tr>
+        </thead>
         @foreach (var customer in Model.Customers)
         {
             <tr>
                 <td>
                     <a href="@Url.Action("Details","Customer", new { id = customer.ID })" style="text-decoration:none">@customer.FirstName @customer.LastName</a>
+                </td>
+                <td>
+                    @customer.MembershipType.Name
                 </td>
             </tr>
         }

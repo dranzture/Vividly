@@ -16,7 +16,7 @@ else
         {
             <tr>
                 <td>
-                    <p>@movie.Name</p>
+                    <a href="@Url.Action("Details","Movie", new { id = movie.ID })">@movie.Name</a>
                 </td>               
             </tr>
         }

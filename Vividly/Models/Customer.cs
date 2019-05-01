@@ -15,6 +15,7 @@ namespace Vividly.Models
         [Required]
         [StringLength(255)]
         public string LastName { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public bool IsSubscribedToNewsletter { get; set; }
         public MembershipType MembershipType { get; set; }
         public byte MembershipTypeID { get; set; }

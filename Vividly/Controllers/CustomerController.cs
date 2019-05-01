@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using Vividly.Models;
@@ -23,16 +24,19 @@ namespace Vividly.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            var dbCustomers = _context.Customers.ToList();
+            var dbCustomers = _context.Customers.Include(c=>c.MembershipType).ToList();
             CustomersViewModel Customers = new CustomersViewModel();
             Customers.Customers = dbCustomers;                                 
             return View(Customers);
         }
-
-        [Route("customer/details/{id}")]
+        public ActionResult New()
+        {
+            return View();
+        }
+        [Route("Customer/Details/{id}")]
         public ActionResult Details(int id)
         {
-            Customer customer = _context.Customers.Where(s => s.ID == id).FirstOrDefault();
+            Customer customer = _context.Customers.Include(c => c.MembershipType).Where(s => s.ID == id).FirstOrDefault();
             if (customer != null)
             {
                 return View(customer);
