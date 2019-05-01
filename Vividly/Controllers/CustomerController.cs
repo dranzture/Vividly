@@ -11,6 +11,7 @@ namespace Vividly.Controllers
 {
     public class CustomerController : Controller
     {
+        //Update-Package Microsoft.CodeDom.Providers.DotNetCompilerPlatform -r
         private ApplicationDbContext _context;
         public CustomerController()
         {
