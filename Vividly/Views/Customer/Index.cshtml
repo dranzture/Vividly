@@ -1,0 +1,16 @@
+﻿@model Vividly.View_Models.CustomersViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+<ul>
+    @foreach(var customer in Model.Customers)
+    {
+        <li>
+            <a href="@Url.Action("Details","Customer", new { id = customer.ID })" style="text-decoration:none">@customer.FirstName @customer.LastName</a>
+        </li>
+    }
+</ul>
+

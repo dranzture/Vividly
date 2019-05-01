@@ -10,8 +10,8 @@ namespace Vividly.Controllers
 {
     public class MovieController : Controller
     {
-        // GET: Movie/Random
-        public ActionResult Random()
+        // GET: Movie
+        public ActionResult Index()
         {
             var movie = new Movie() { ID = 1, Name = "Avengers: Endgame", ReleasedDate = new DateTime(2019, 4, 26) };
             var customers = new List<Customer>
