@@ -10,24 +10,37 @@ namespace Vividly.Controllers
 {
     public class CustomerController : Controller
     {
-        List<Customer> customers = new List<Customer>
+        private ApplicationDbContext _context;
+        public CustomerController()
         {
-            new Customer{ ID=1, FirstName="Polat", LastName="Coban" },
-            new Customer{ ID=2, FirstName="Ashley", LastName="Coban" }
-        };
+            _context = new ApplicationDbContext();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         // GET: Customer
         public ActionResult Index()
         {
+            var dbCustomers = _context.Customers.ToList();
             CustomersViewModel Customers = new CustomersViewModel();
-            Customers.Customers = customers;                                 
+            Customers.Customers = dbCustomers;                                 
             return View(Customers);
         }
 
         [Route("customer/details/{id}")]
         public ActionResult Details(int id)
         {
-            var customer = customers.Where(s => s.ID == id).First();
-            return View(customer);
+            Customer customer = _context.Customers.Where(s => s.ID == id).FirstOrDefault();
+            if (customer != null)
+            {
+                return View(customer);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
     }
 }

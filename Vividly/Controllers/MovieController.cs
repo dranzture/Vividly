@@ -13,21 +13,19 @@ namespace Vividly.Controllers
         // GET: Movie
         public ActionResult Index()
         {
-            var movie = new Movie() { ID = 1, Name = "Avengers: Endgame", ReleasedDate = new DateTime(2019, 4, 26) };
-            var customers = new List<Customer>
-            {
-                new Customer{ ID=1, FirstName="Polat", LastName="Coban" },
-                new Customer{ ID=2, FirstName="Ashley", LastName="Coban" }
+            var movie = new List<Movie> {
+                new Movie { ID = 1, Name = "Avengers: Infinity War", ReleasedDate = new DateTime(2018, 4, 26) },
+                new Movie { ID = 2, Name = "Avengers: Endgame", ReleasedDate = new DateTime(2019, 4, 26) }
             };
-            var viewModel = new RandomMovieViewModel
+
+            var viewModel = new MovieViewModel
             {
-                Movie = movie,
-                Customers = customers
+                Movies = movie,
             };
             return View(viewModel);
 
         }
-        [Route("movies/released/{year:regex(\\d{4})}/{month:regex(\\d{2}):range(1,12)}")]
+        [Route("movie/released/{year:regex(\\d{4})}/{month:regex():range(1,12)}")]
         public ActionResult ReleaseByYear(int year, int month)
         {
             return Content(year + " / " + month);

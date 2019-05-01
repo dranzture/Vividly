@@ -1,15 +1,25 @@
-﻿@model Vividly.View_Models.RandomMovieViewModel
+﻿@model Vividly.View_Models.MovieViewModel
 @{
     ViewBag.Title = "Random";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Movie.Name</h2>
-<ul>
-    @foreach(var customer in Model.Customers)
-    {
-        <li style="text-decoration:none">
-            <a href="">@customer.FirstName @customer.LastName</a>
-        </li>
-    }
-</ul>
+<h2>Movies</h2>
+@if (Model.Movies.Count == 0)
+{
+    <p>There are no movies</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td>
+                    <p>@movie.Name</p>
+                </td>               
+            </tr>
+        }
+    </table>
+}
+
