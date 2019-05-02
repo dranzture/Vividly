@@ -1,0 +1,43 @@
+﻿@model Vividly.View_Models.MovieFormViewModel
+@{
+    ViewBag.Title = "MovieForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.Movie == null)
+{
+    <h2>New Movie</h2>
+}
+else
+{
+    if (Model.Movie.ID != 0)
+    {
+        <h2>Edit Movie</h2>
+    }
+
+    else
+    {
+        <h2>New Movie</h2>
+    }
+}
+@using (Html.BeginForm("Save", "Movie"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Name, "Name")
+        @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.ReleaseDate, "Release Date")
+        @Html.TextBoxFor(m => m.Movie.ReleaseDate, "{0:MMM / d / yyyy}", new { @class = "form-control", @placeholder = "MM / DD / YYYY" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.GenreID, "Genre")
+        @Html.DropDownListFor(m => m.Movie.GenreID, new SelectList(Model.Genres, "ID", "Type"), "Select Genre", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.InStock, "Number In Stock")
+        @Html.TextBoxFor(m => m.Movie.InStock, new { @class = "form-control" })
+    </div>
+    @Html.HiddenFor(m => m.Movie.ID)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+

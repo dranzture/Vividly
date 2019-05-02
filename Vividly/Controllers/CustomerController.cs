@@ -30,22 +30,78 @@ namespace Vividly.Controllers
             Customers.Customers = dbCustomers;                                 
             return View(Customers);
         }
-        public ActionResult New()
+        [HttpPost]
+        public ActionResult Save(Customer customer)
         {
-            return View();
-        }
-        [Route("Customer/Details/{id}")]
-        public ActionResult Details(int id)
-        {
-            Customer customer = _context.Customers.Include(c => c.MembershipType).Where(s => s.ID == id).FirstOrDefault();
-            if (customer != null)
+            if (!ModelState.IsValid)
             {
-                return View(customer);
+                var viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            }
+            if(customer.ID == 0)
+            {
+                _context.Customers.Add(customer);
             }
             else
             {
-                return HttpNotFound();
+                var customerInDb = _context.Customers.Single(c => c.ID == customer.ID);
+
+                //Mapper.Map(customer, customerInDb);
+
+                customerInDb.FirstName = customer.FirstName;
+                customerInDb.LastName = customer.LastName;
+                customerInDb.DateOfBirth = customer.DateOfBirth;
+                customerInDb.MembershipTypeID = customer.MembershipTypeID;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+
             }
+
+            _context.SaveChanges();
+            return RedirectToAction("Index","Customer");
         }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c=>c.ID==id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+
+            return View("CustomerForm", viewModel);
+        }
+
+        public ActionResult New()
+        {
+            var MembershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new CustomerFormViewModel
+            {
+                MembershipTypes = MembershipTypes
+            };
+            return View("CustomerForm",viewModel);
+        }
+
+        //[Route("Customer/Details/{id}")]
+        //public ActionResult Details(int id)
+        //{
+        //    Customer customer = _context.Customers.Include(c => c.MembershipType).Where(s => s.ID == id).FirstOrDefault();
+        //    if (customer != null)
+        //    {
+        //        return View(customer);
+        //    }
+        //    else
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //}
     }
 }

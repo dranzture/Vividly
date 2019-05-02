@@ -5,6 +5,11 @@
 }
 
 <h2>Movies</h2>
+<div class="container">
+    @Html.ActionLink("New", "New", "Movie", new { @class = "btn btn-primary" })
+
+</div>
+<br>
 @if (Model.Movies.Count == 0)
 {
     <p>There are no movies</p>
@@ -16,7 +21,7 @@ else
         {
             <tr>
                 <td>
-                    <a href="@Url.Action("Details","Movie", new { id = movie.ID })">@movie.Name</a>
+                    <a href="@Url.Action("Edit","Movie", new { id = movie.ID })">@movie.Name</a>
                 </td>               
             </tr>
         }

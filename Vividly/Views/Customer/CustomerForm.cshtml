@@ -1,0 +1,54 @@
+﻿@model Vividly.View_Models.CustomerFormViewModel
+@{
+    /**/
+
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model.Customer == null)
+{
+    <h2>New Customer</h2>
+}
+else
+{
+    if (Model.Customer.ID != 0)
+    {
+        <h2>Edit Customer</h2>
+    }
+
+    else
+    {
+        <h2>New Customer</h2>
+    }
+    
+}
+/**/
+@using (Html.BeginForm("Save", "Customer"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.FirstName, "First Name")
+        @Html.TextBoxFor(m => m.Customer.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.FirstName, "Enter First Name")
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.LastName, "Last Name")
+        @Html.TextBoxFor(m => m.Customer.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.LastName, "Enter Last Name")
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.DateOfBirth, "Date of Birth")
+        @Html.TextBoxFor(m => m.Customer.DateOfBirth, "{0:MMM / d / yyyy}", new { @class = "form-control", @placeholder = "MM / DD / YYYY" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.MembershipTypeID, "Membership Type")
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeID, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Customer.MembershipTypeID, "Select a Membership Type")
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribe to Newsletter?
+        </label>
+    </div>
+    @Html.HiddenFor(m => m.Customer.ID);
+    <button type="submit" class="btn btn-primary">Save</button>
+}
