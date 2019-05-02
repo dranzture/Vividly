@@ -13,10 +13,12 @@ namespace Vividly.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
@@ -25,6 +27,7 @@ namespace Vividly.Models
 
         public MembershipType MembershipType { get; set; }
 
+        [Display(Name = "Membership Type")]
         public byte MembershipTypeID { get; set; }
     }
 }
