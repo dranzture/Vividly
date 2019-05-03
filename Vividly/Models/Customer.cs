@@ -11,16 +11,17 @@ namespace Vividly.Models
         [Required]
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Please Enter Customer's Name")]
         [StringLength(255)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please Enter Customer's Last Name")]
         [StringLength(255)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Min18YearsIfAMember]
         public DateTime? DateOfBirth { get; set; }
 
         public bool IsSubscribedToNewsletter { get; set; }

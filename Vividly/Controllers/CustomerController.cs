@@ -31,6 +31,7 @@ namespace Vividly.Controllers
             return View(Customers);
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
             if (!ModelState.IsValid)
@@ -85,6 +86,7 @@ namespace Vividly.Controllers
             var MembershipTypes = _context.MembershipTypes.ToList();
             var viewModel = new CustomerFormViewModel
             {
+                Customer = new Customer(),
                 MembershipTypes = MembershipTypes
             };
             return View("CustomerForm",viewModel);

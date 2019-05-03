@@ -60,6 +60,7 @@ namespace Vividly.Controllers
             var genresInDb = _context.Genres.ToList();
             var viewModel = new MovieFormViewModel
             {
+                Movie = new Movie(),
                 Genres = genresInDb
             };
             return View("MovieForm", viewModel);

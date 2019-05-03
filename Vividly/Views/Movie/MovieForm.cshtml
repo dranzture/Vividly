@@ -24,20 +24,28 @@ else
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.Name, "Name")
         @Html.TextBoxFor(m => m.Movie.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.Movie.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.ReleaseDate, "Release Date")
         @Html.TextBoxFor(m => m.Movie.ReleaseDate, "{0:MMM / d / yyyy}", new { @class = "form-control", @placeholder = "MM / DD / YYYY" })
+        @Html.ValidationMessageFor(m=>m.Movie.ReleaseDate)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.GenreID, "Genre")
         @Html.DropDownListFor(m => m.Movie.GenreID, new SelectList(Model.Genres, "ID", "Type"), "Select Genre", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.Movie.GenreID)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.InStock, "Number In Stock")
         @Html.TextBoxFor(m => m.Movie.InStock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.Movie.InStock)
     </div>
     @Html.HiddenFor(m => m.Movie.ID)
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 }
-
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
