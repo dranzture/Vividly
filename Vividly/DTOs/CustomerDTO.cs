@@ -18,7 +18,7 @@ namespace Vividly.DTOs
         [StringLength(255)]
         public string LastName { get; set; }
 
-        [Min18YearsIfAMember]
+        //[Min18YearsIfAMember]
         public DateTime? DateOfBirth { get; set; }
 
         public bool IsSubscribedToNewsletter { get; set; }
