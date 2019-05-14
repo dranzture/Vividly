@@ -21,6 +21,7 @@ namespace Vividly.DTOs
         //[Min18YearsIfAMember]
         public DateTime? DateOfBirth { get; set; }
 
+        public MembershipTypeDTO MembershipType { get; set; }
         public bool IsSubscribedToNewsletter { get; set; }
         
         public byte MembershipTypeID { get; set; }

@@ -24,13 +24,13 @@ namespace Vividly.Controllers
         // GET: Movie
         public ActionResult Index()
         {
-            var Movies = _context.Movies.Include(g=>g.Genre).ToList();
+            //var Movies = _context.Movies.Include(g=>g.Genre).ToList();
 
-            var viewModel = new MovieViewModel
-            {
-                Movies = Movies,
-            };
-            return View(viewModel);
+            //var viewModel = new MovieViewModel
+            //{
+            //    Movies = Movies,
+            //};
+            return View();
 
         }
         [HttpPost]

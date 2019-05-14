@@ -25,10 +25,10 @@ namespace Vividly.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            var dbCustomers = _context.Customers.Include(c=>c.MembershipType).ToList();
-            CustomersViewModel Customers = new CustomersViewModel();
-            Customers.Customers = dbCustomers;                                 
-            return View(Customers);
+            //var dbCustomers = _context.Customers.Include(c=>c.MembershipType).ToList();
+            //CustomersViewModel Customers = new CustomersViewModel();
+            //Customers.Customers = dbCustomers;                                 
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

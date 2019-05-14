@@ -11,9 +11,13 @@ namespace Vividly.App_Start
     {
         public MappingProfile()
         {
+            //domain to dto
             Mapper.CreateMap<Customer, CustomerDTO>().ForMember(c=>c.ID, opt=>opt.Ignore());
             Mapper.CreateMap<CustomerDTO, Customer>();
+            Mapper.CreateMap<MembershipType, MembershipTypeDTO>();
+            Mapper.CreateMap<Genre, GenreDTO>();
 
+            //dto to domain
             Mapper.CreateMap<Movie, MovieDTO>().ForMember(c => c.ID, opt => opt.Ignore());
             Mapper.CreateMap<MovieDTO, Movie>();
         }       

@@ -15,7 +15,7 @@ namespace Vividly.DTOs
         [Required]
         public string Name { get; set; }
 
-        public Genre Genre { get; set; }
+        public GenreDTO Genre { get; set; }
 
         [Required]
         public byte GenreID { get; set; }

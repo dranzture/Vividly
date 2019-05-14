@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -18,9 +19,21 @@ namespace Vividly.Controllers.Api
             _context = new ApplicationDbContext();
         }
         // GET /api/customer
-        public IEnumerable<CustomerDTO> GetCustomers()
+        public IHttpActionResult GetCustomers()
         {
-            return _context.Customers.ToList().Select(Mapper.Map<Customer,CustomerDTO>);
+            
+            var customersInDb = _context.Customers
+                .Include(c=>c.MembershipType)
+                .ToList();
+            List<CustomerDTO> customerDTOs = new List<CustomerDTO>();
+            foreach(var customer in customersInDb)
+            {
+                var customersDTO = Mapper.Map<Customer, CustomerDTO>(customer);
+                customersDTO.ID = customer.ID;
+                customerDTOs.Add(customersDTO);
+
+            }
+            return Ok(customerDTOs);
         }
 
         // GET /api/customer/1

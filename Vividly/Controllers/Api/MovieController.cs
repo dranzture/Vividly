@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Http;
 using Vividly.DTOs;
@@ -19,7 +20,16 @@ namespace Vividly.Controllers.Api
         // GET api/movie
         public IHttpActionResult GetMovies()
         {
-            return Ok(_context.Movies.ToList().Select(Mapper.Map<Movie, MovieDTO>));
+            var movieInDb = _context.Movies.Include(g => g.Genre).ToList();
+            List<MovieDTO> movieDTOs = new List<MovieDTO>();
+            foreach (var movie in movieInDb)
+            {
+                var movieDTO = Mapper.Map<Movie, MovieDTO>(movie);
+                movieDTO.ID = movie.ID;
+                movieDTOs.Add(movieDTO);
+
+            }
+            return Ok(movieDTOs);
         }
         // GET api/movie/1
         public IHttpActionResult GetMovie(int id)
