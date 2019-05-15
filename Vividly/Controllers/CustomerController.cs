@@ -22,6 +22,7 @@ namespace Vividly.Controllers
             _context.Dispose();
         }
 
+
         // GET: Customer
         public ActionResult Index()
         {

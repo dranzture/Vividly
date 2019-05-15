@@ -30,17 +30,19 @@ namespace Vividly.Controllers
             //{
             //    Movies = Movies,
             //};
-            return View();
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("List");
 
+            return View("ReadOnlyList");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
-            if(movie.ID == 0)
+            if (movie.ID == 0)
             {
                 movie.DateAdded = DateTime.Now;
-                
+
                 _context.Movies.Add(movie);
             }
             else
@@ -50,12 +52,12 @@ namespace Vividly.Controllers
                 movieInDb.Name = movie.Name;
                 movieInDb.InStock = movie.InStock;
                 movieInDb.ReleaseDate = movie.ReleaseDate;
-                
+
             }
             _context.SaveChanges();
             return RedirectToAction("Index", "Movie");
         }
-
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var genresInDb = _context.Genres.ToList();
@@ -69,7 +71,7 @@ namespace Vividly.Controllers
 
         public ActionResult Edit(int id)
         {
-            var movie = _context.Movies.Single(m=>m.ID == id);
+            var movie = _context.Movies.Single(m => m.ID == id);
             var viewModel = new MovieFormViewModel
             {
                 Movie = movie,
@@ -81,7 +83,7 @@ namespace Vividly.Controllers
         [Route("movie/details/{id}")]
         public ActionResult Details(int id)
         {
-            var Movie = _context.Movies.Include(g => g.Genre).Where(i=>i.ID==id).FirstOrDefault();
+            var Movie = _context.Movies.Include(g => g.Genre).Where(i => i.ID == id).FirstOrDefault();
             return View(Movie);
         }
     }
