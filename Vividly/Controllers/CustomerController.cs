@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Vividly.Models;
 using Vividly.View_Models;
+using System.Runtime.Caching;
 
 namespace Vividly.Controllers
 {
@@ -25,10 +26,12 @@ namespace Vividly.Controllers
 
         // GET: Customer
         public ActionResult Index()
-        {
-            //var dbCustomers = _context.Customers.Include(c=>c.MembershipType).ToList();
-            //CustomersViewModel Customers = new CustomersViewModel();
-            //Customers.Customers = dbCustomers;                                 
+        {              
+            //if (MemoryCache.Default["Genres"] == null)
+            //{
+            //    MemoryCache.Default["Genres"] = _context.Genres.ToList();
+            //}
+            //var genres = MemoryCache.Default["Genres"] as IEnumerable<Genre>;
             return View();
         }
         [HttpPost]
