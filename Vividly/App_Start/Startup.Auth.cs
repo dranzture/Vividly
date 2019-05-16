@@ -55,8 +55,8 @@ namespace Vividly
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "495613177643780",
-               appSecret: "e47467420d34de02fb619a206ce184be");
+               appId: "",
+               appSecret: "");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
