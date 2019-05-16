@@ -56,7 +56,7 @@ namespace Vividly
 
             //app.UseFacebookAuthentication(
             //   appId: "",
-            //   appSecret: "");
+            //   appSecret: ""); change
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
