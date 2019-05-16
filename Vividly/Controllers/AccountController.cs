@@ -10,7 +10,6 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Vividly.Models;
-using Vividly.View_Models.Account;
 
 namespace Vividly.Controllers
 {
@@ -157,8 +156,7 @@ namespace Vividly.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    DrivingLicense = model.DrivingLicense,
-                    PhoneNumber = model.Phone
+                    DrivingLicense = model.DrivingLicense
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -381,12 +379,7 @@ namespace Vividly.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    DrivingLicense = model.DrivingLicense,
-                    PhoneNumber = model.Phone
-                };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
