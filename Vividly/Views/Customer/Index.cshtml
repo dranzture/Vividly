@@ -29,7 +29,7 @@
        $(document).ready(function () {
           var table = $("#customers").DataTable({
                ajax: {
-                   url: "http://localhost:8080/api/Customer",
+                   url: "https://localhost:44324/api/Customer",
                    dataSrc: ""
                },
                columns: [
@@ -63,7 +63,7 @@
                bootbox.confirm("Are you sure you want to delete this customer?", function (result) {
                    if (result) {
                        $.ajax({
-                           url: "http://localhost:8080/api/Customer/" + button.attr("data-customer-id"),
+                           url: "https://localhost:44324/api/Customer/" + button.attr("data-customer-id"),
                            method: "DELETE",
                            success: function () {
                                table.row(button.parents("tr")).remove().draw();

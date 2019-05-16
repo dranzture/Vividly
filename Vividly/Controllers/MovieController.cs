@@ -68,7 +68,7 @@ namespace Vividly.Controllers
             };
             return View("MovieForm", viewModel);
         }
-
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var movie = _context.Movies.Single(m => m.ID == id);
@@ -79,7 +79,7 @@ namespace Vividly.Controllers
             };
             return View("MovieForm", viewModel);
         }
-
+        [Authorize(Roles = RoleName.CanManageMovies)]
         [Route("movie/details/{id}")]
         public ActionResult Details(int id)
         {
