@@ -27,7 +27,7 @@ namespace Vividly.Controllers.Api
             foreach(var customer in customersInDb)
             {
                 var customersDTO = Mapper.Map<Customer, CustomerDTO>(customer);
-                customersDTO.ID = customer.ID;
+                customersDTO.ID = customer.ID;               
                 customerDTOs.Add(customersDTO);
 
             }

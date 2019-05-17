@@ -18,6 +18,13 @@ namespace Vividly.DTOs
         [StringLength(255)]
         public string LastName { get; set; }
 
+        public string Name {
+            get
+            {
+                return FirstName + " " + LastName;
+            }            
+        }
+
         //[Min18YearsIfAMember]
         public DateTime? DateOfBirth { get; set; }
 

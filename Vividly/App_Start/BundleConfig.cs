@@ -13,7 +13,8 @@ namespace Vividly
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js",
                         "~/Scripts/DataTables/jquery.datatables.js",
-                        "~/Scripts/DataTables/datatables.bootstrap.js"
+                        "~/Scripts/DataTables/datatables.bootstrap.js",
+                        "~/Scripts/typeahead.bundle.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -28,7 +29,9 @@ namespace Vividly
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/cyborg.bootstrap.css",
                       "~/Content/datatables/css/datatables.bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/typeahead.css",
+                      "~/Content/site.css"
+                      ));
 
         }
     }

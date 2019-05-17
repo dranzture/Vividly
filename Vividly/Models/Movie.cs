@@ -22,6 +22,9 @@ namespace Vividly.Models
         [Required]
         public int InStock { get; set; }
 
+        public byte NumberAvailable { get; set; }
+
+
         [Required]
         public DateTime ReleaseDate { get; set; }
 

@@ -1,0 +1,47 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "New Rental Form";
+}
+
+<h2>New Rental Form</h2>
+<form>
+    <div class="form-group">
+        <label>Customer</label>
+        <input id="customer" name="customer" type="text" value="" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Movie</label>
+        <input type="text" value="" class="form-control" />
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            var vm = {}
+
+            var customers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),             
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                prefetch: 'https://localhost:44324/api/customer',
+                
+            });
+            customers.initialize();
+            $('#customer').typeahead({
+                minLength: 3,
+                hint: true,
+                highlight: true
+            }, {
+                    name: 'customers',
+                    display: 'name',
+                    source: customers.ttAdapter()
+
+                }).on("typeahead:select", function (e, customer) {
+                    console.log(customer.id);
+                    vm.customerId = customer.id;
+                });
+
+        });
+    </script>
+}
