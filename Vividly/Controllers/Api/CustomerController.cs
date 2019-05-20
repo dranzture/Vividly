@@ -17,21 +17,26 @@ namespace Vividly.Controllers.Api
             _context = new ApplicationDbContext();
         }
         // GET /api/customer
-        public IHttpActionResult GetCustomers()
+        public IHttpActionResult GetCustomers(string query = null)
         {
-            
-            var customersInDb = _context.Customers
-                .Include(c=>c.MembershipType)
-                .ToList();
-            List<CustomerDTO> customerDTOs = new List<CustomerDTO>();
-            foreach(var customer in customersInDb)
-            {
-                var customersDTO = Mapper.Map<Customer, CustomerDTO>(customer);
-                customersDTO.ID = customer.ID;               
-                customerDTOs.Add(customersDTO);
 
-            }
-            return Ok(customerDTOs);
+            var customersQuery = _context.Customers
+                .Include(c => c.MembershipType); 
+
+            if (!String.IsNullOrWhiteSpace(query))
+                customersQuery = customersQuery.Where(c => c.FirstName.Contains(query) || c.LastName.Contains(query));
+            var customers = customersQuery.ToList();
+            var customerDtos = customersQuery
+                .ToList()
+                .Select(Mapper.Map<Customer, CustomerDTO>);
+
+
+            //for(int i=0;i<customers.Count && i < customerDtos.ToList().Count; i++)
+            //{
+            //    customerDtos.ToList()[i].ID = customers[i].ID;
+            //}
+
+            return Ok(customerDtos);
         }
 
         // GET /api/customer/1

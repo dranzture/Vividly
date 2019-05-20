@@ -17,6 +17,7 @@ namespace Vividly.Controllers.Api
         {
             _context = new ApplicationDbContext();
         }
+        // POST api/rental
         [HttpPost]
         public IHttpActionResult CreateNewRental(RentalsDTO newRental)
         {

@@ -20,7 +20,7 @@ namespace Vividly.Models
         [StringLength(255)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-
+        
         [Min18YearsIfAMember]
         public DateTime? DateOfBirth { get; set; }
 
